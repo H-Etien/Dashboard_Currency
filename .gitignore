@@ -1,2 +1,5 @@
 venv/
 .env
+
+*.sh
+db.sqlite3
