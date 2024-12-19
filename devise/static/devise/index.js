@@ -16,34 +16,24 @@ const fetch_currency = async () => {
 const load_currency_chart = async () => {
     await fetch_currency();
 
-    let currency_dataset = [];
-
-    //key = currency
-    //value = rates
     for (const [key, value] of Object.entries(currency_rates)) {
-        currency_dataset.push({
-            label: key,
-            data: value,
-            fill: false,
-            backgroundColor: "rgba(194, 16, 16,0.5)",
-            borderColor: "rgb(255,128,128)",
-            beginAtZero: true,
+        const chart_name = "chart-" + key;
+        let ctx = document.getElementById(chart_name);
+        new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: currency_days,
+                datasets: [
+                    {
+                        label: key,
+                        data: value,
+                        fill: false,
+                        backgroundColor: "rgba(194, 16, 16,0.5)",
+                        borderColor: "rgb(255,128,128)",
+                    },
+                ],
+            },
         });
     }
-    var ctx = document.getElementById("chart");
-    new Chart(ctx, {
-        type: "line",
-        data: {
-            labels: currency_days,
-            datasets: currency_dataset,
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                },
-            },
-        },
-    });
 };
 load_currency_chart();
