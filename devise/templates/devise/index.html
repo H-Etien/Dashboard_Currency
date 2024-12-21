@@ -12,7 +12,8 @@
             crossorigin="anonymous"
         />
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <!-- <script src="{% static 'devise/chart.js/auto' %}"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-trendline/dist/chartjs-plugin-trendline.min.js"></script>
+
         <title>Document</title>
     </head>
     <body class="bg-dark">
@@ -20,14 +21,20 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col">
-                    <h1 class="text-white">Tableau de Bord -</h1>
-                    <a href="" class="btn btn-secondary">Semaine</a>
-                    <a href="" class="btn btn-secondary">Mois</a>
-                    <a href="" class="btn btn-secondary">Année</a>
+                    <h1 class="text-white">Tableau de Bord</h1>
+                    <a class="btn btn-secondary" onclick="updateURL(7)"
+                        >Semaine
+                    </a>
+                    <a class="btn btn-secondary" onclick="updateURL(30)"
+                        >Mois</a
+                    >
+                    <a class="btn btn-secondary" onclick="updateURL(365)"
+                        >Année</a
+                    >
                 </div>
             </div>
             <div class="row justify-content-center">
-                <div class="col-md-10 col-lg-6 bg-white">
+                <div class="col-md-10 col-lg-6 bg-dark bg-gradient">
                     {% for currency in data %}
                     <canvas id="chart-{{ currency }}">
                         <!--  -->
@@ -37,5 +44,18 @@
             </div>
         </div>
     </body>
+    <script>
+        var url_api = "{% url 'api_currency' days_range=20 %}";
+
+        function updateURL(days_range) {
+            if (days_range == 7)
+                url_api = "{% url 'api_currency' days_range=7 %}";
+            else if (days_range == 30)
+                url_api = "{% url 'api_currency' days_range=30 %}";
+            else if (days_range == 365)
+                url_api = "{% url 'api_currency' days_range=365 %}";
+            load_currency_chart();
+        }
+    </script>
     <script src="{% static 'devise/index.js' %}"></script>
 </html>

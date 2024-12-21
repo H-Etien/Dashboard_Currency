@@ -1,8 +1,11 @@
 let currency_days = [];
 let currency_rates = {};
+//liste de tous les charts
+let charts = {};
 
 const fetch_currency = async () => {
-    const currency_response = await fetch("http://127.0.0.1:8000/api/");
+    console.log(url_api);
+    const currency_response = await fetch(url_api);
 
     if (!currency_response.ok) {
         throw new Error("Erreur avec API");
@@ -19,7 +22,12 @@ const load_currency_chart = async () => {
     for (const [key, value] of Object.entries(currency_rates)) {
         const chart_name = "chart-" + key;
         let ctx = document.getElementById(chart_name);
-        new Chart(ctx, {
+
+        if (charts[chart_name]) {
+            charts[chart_name].destroy();
+        }
+
+        charts[chart_name] = new Chart(ctx, {
             type: "line",
             data: {
                 labels: currency_days,
@@ -29,9 +37,27 @@ const load_currency_chart = async () => {
                         data: value,
                         fill: false,
                         backgroundColor: "rgba(194, 16, 16,0.5)",
-                        borderColor: "rgb(255,128,128)",
+                        borderColor: "rgb(255, 0, 0)",
+                        trendlineLinear: {
+                            colorMin: " rgb(60, 255, 21)",
+                            colorMax: " rgb(60, 255, 21)",
+
+                            width: 3,
+                            lineStyle: "dashdot",
+                        },
                     },
                 ],
+            },
+
+            options: {
+                // The options are outside of the datasets property
+                scales: {
+                    x: {
+                        grid: {
+                            display: false,
+                        },
+                    },
+                },
             },
         });
     }
