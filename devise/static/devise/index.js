@@ -39,8 +39,8 @@ const load_currency_chart = async () => {
                         backgroundColor: "rgba(194, 16, 16,0.5)",
                         borderColor: "rgb(255, 0, 0)",
                         trendlineLinear: {
-                            colorMin: " rgb(60, 255, 21)",
-                            colorMax: " rgb(60, 255, 21)",
+                            colorMin: " rgba(60, 255, 21, 0.5)",
+                            colorMax: " rgba(60, 255, 21, 0.5)",
 
                             width: 3,
                             lineStyle: "dashdot",
