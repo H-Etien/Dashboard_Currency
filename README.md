@@ -23,7 +23,8 @@ The application fetches real-time currency data from a public API and displays t
 
 ### How to use
 
-![image](https://github.com/user-attachments/assets/6201ee3f-a5ed-44fd-b257-dde2d665ed20)
+![chrome_nu9u9FfS7o](https://github.com/user-attachments/assets/39865e90-0a47-448f-8558-04fa86e0e586)
+
 
 ---
 
